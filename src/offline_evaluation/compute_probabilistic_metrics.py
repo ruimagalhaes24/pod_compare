@@ -125,7 +125,13 @@ def main(
         num_false_positives = false_positives['predicted_box_means'].shape[0]
 
         per_class_output_list = []
-        for class_idx in [1, 3]:
+        
+        meta_catalog = MetadataCatalog.get(args.test_dataset)
+        
+        #use [1, 3] if you want to only use "car" and "person" for the NLL calculations (only used in dataset shift situation)
+        #use list(meta_catalog.thing_dataset_id_to_contiguous_id.keys()) for all the categories
+        
+        for class_idx in list(meta_catalog.thing_dataset_id_to_contiguous_id.keys()):
             true_positives_valid_idxs = true_positives['gt_converted_cat_idxs'] == class_idx
             false_positives_valid_idxs = false_positives['predicted_cat_idxs'] == class_idx
 
