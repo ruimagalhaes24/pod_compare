@@ -3,8 +3,12 @@ _BASE_: "../../Base-RetinaNet.yaml"
 MODEL:
     META_ARCHITECTURE: "ProbabilisticRetinaNet"
 
-    WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
-
+    #WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+    WEIGHTS: "data/BDD-Detection/retinanet/retinanet_R_50_FPN_1x/random_seed_0/retinanet_R_50_FPN_1x.pth"
+    #WEIGHTS: "data/BDD-Detection/retinanet/retinanet_R_50_FPN_1x_reg_cls_var/random_seed_0/retinanet_R_50_FPN_1x_reg_cls_var.pth"
+    #WEIGHTS: "data/BDD-Detection/retinanet/retinanet_R_50_FPN_1x_dropout/random_seed_0/retinanet_R_50_FPN_1x_dropout.pth"
+    #WEIGHTS: "data/BDD-Detection/retinanet/retinanet_R_50_FPN_1x_reg_cls_var_dropout/random_seed_0/retinanet_R_50_FPN_1x_reg_cls_var_dropout.pth"
+    
     RESNETS:
       DEPTH: 50
 
