@@ -35,9 +35,15 @@ def main(args, cfg=None):
     gt_coco_api = COCO(meta_catalog.json_file)
     res_coco_api = gt_coco_api.loadRes(prediction_file_name)
     results_api = COCOeval(gt_coco_api, res_coco_api, iouType='bbox')
-
-    results_api.params.catIds = [1, 3] #list(meta_catalog.thing_dataset_id_to_contiguous_id.keys())
-
+    
+    #Use this for mAP only with "car" and "person" as categories (for dataset shift mAP)
+    results_api.params.catIds = [1, 3] #This only works for BDD!!! For kitti dataset, you should use either the list or [1,2]
+    
+    #Use this for standard mAP across all existing categories
+    #results_api.params.catIds = list(meta_catalog.thing_dataset_id_to_contiguous_id.keys())
+    #print(meta_catalog)
+    #print(results_api.params.catIds)
+    
     # Calculate and print aggregate results
     results_api.evaluate()
     results_api.accumulate()
